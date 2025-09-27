@@ -14,8 +14,10 @@ export function useProducts() {
       try {
         const data = await productService.getProducts();
         setProducts(data);
-      } catch (err: any) {
-        setError(err.message || "Failed to fetch products");
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message || "Failed to fetch products");
+        }
       } finally {
         setLoading(false);
       }

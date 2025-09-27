@@ -28,6 +28,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const userDetails = await authService.getCurrentUser();
       // Attach the token back to the User object
       setCurrentUser({ ...userDetails });
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       // If the token is expired or invalid, log out
       authService.logout();

@@ -5,31 +5,29 @@ import { productService } from "@/services";
 import ProductTabs from "@/app/shop/[id]/(components)/product-tabs";
 import { useEffect, useState } from "react";
 import { Product } from "@/services/models";
-import { use } from "react";
 import { useProducts } from "@/hooks";
 import ProductCard from "@/components/product-card";
+import Image from "next/image";
+import { useParams } from "next/navigation";
 
-interface ProductDetailPageProps {
-  params: {
-    id: string;
-  };
-}
-
-export default function ProductDetailPage({ params }: ProductDetailPageProps) {
-  const { id } = use(params);
+export default function ProductDetailPage() {
+  const params = useParams<{ id: string }>(); // 👈 khai báo generic để có type
+  const id = params.id; // string
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const { products } = useProducts();
-  const [latestProducts, setLatestProducts] = useState([]);
+  const [latestProducts, setLatestProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     async function fetchProductItem() {
       try {
-        const res = await productService.getProductById(id);
+        const res = await productService.getProductById(Number(id));
         setProduct(res);
-      } catch (err: any) {
-        setError(err.message || "Something went wrong");
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message || "Something went wrong");
+        }
       } finally {
         setLoading(false);
       }
@@ -81,19 +79,27 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Product Images */}
         <div className="flex flex-col gap-3">
-          <img
-            src={product.thumbnail}
-            alt={product.title}
-            className="w-full h-80 object-cover rounded-lg border"
-          />
+          {/* Ảnh chính */}
+          <div className="relative w-full h-80">
+            <Image
+              fill
+              src={product.thumbnail}
+              alt={product.title}
+              className="object-cover rounded-lg border"
+            />
+          </div>
+
+          {/* Danh sách ảnh nhỏ */}
           <div className="grid grid-cols-4 gap-2">
             {product.images?.map((img, idx) => (
-              <img
-                key={idx}
-                src={img}
-                alt={`${product.title} ${idx}`}
-                className="w-full h-20 object-cover rounded-md border"
-              />
+              <div key={idx} className="relative w-full h-20">
+                <Image
+                  fill
+                  src={img}
+                  alt={`${product.title} ${idx}`}
+                  className="object-cover rounded-md border"
+                />
+              </div>
             ))}
           </div>
         </div>

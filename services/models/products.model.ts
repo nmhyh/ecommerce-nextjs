@@ -1,9 +1,3 @@
-// services/ProductService.ts
-
-import axios from 'axios';
-
-// --- 1. INTERFACES CHO CẤU TRÚC DỮ LIỆU DUMMYJSON ---
-
 /** Mô tả cấu trúc cơ bản của một sản phẩm */
 export interface Product {
   id: number

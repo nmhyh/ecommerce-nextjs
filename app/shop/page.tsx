@@ -15,10 +15,10 @@ const sortOptions = [
 
 export default function ShopPage () {
   const { products: productsOrigin, loading, error } = useProducts();
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [totalProducts, setTotalProducts] = useState<number>(0);
-  const [categories, setCategories] = useState([]);
-  const [brands, setBrands] = useState([]);
+  const [categories, setCategories] = useState<string[]>([]);
+  const [brands, setBrands] = useState<string[]>([]);
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [sortOption, setSortOption] = useState<string>('latest');
@@ -29,8 +29,8 @@ export default function ShopPage () {
 
   useEffect(() => {
     setTotalProducts(productsOrigin.length);
-    setCategories([...new Set(productsOrigin.map((p: any) => p.category))]);
-    setBrands([...new Set(productsOrigin.map((p: any) => p.brand))]);
+    setCategories([...new Set(productsOrigin.map((p) => p.category))]);
+    setBrands([...new Set(productsOrigin.map((p) => p.brand))]);
     setProducts(productsOrigin.slice(0, ITEMS_PER_PAGE));
   }, [productsOrigin]);
 
@@ -203,11 +203,11 @@ export default function ShopPage () {
         <div className="bg-white p-6 rounded-lg shadow-lg">
           <h2 className="text-2xl font-bold mb-4">Shirts Category</h2>
           <p className="mb-4">
-            Discover our wide range of shirts, perfect for any occasion. Whether you're looking for something
+            Discover our wide range of shirts, perfect for any occasion. Whether you&apos;re looking for something
             casual
             or formal, we have the perfect shirt for you. Our collection includes a variety of styles, colors,
             and
-            sizes to suit everyone's taste.
+            sizes to suit everyone&apos;s taste.
           </p>
           <p>
             Browse through our selection and find your new favorite shirt today. All our shirts are made from

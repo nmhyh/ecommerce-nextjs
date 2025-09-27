@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Product } from "@/services/models/products.model";
 import httpClient from './axios-client.service';
-import { Cart } from "@/services/models";
+import { CartItem, Carts } from "@/services/models";
 
 export class CartService {
   constructor() {}
@@ -10,10 +10,10 @@ export class CartService {
    * Lấy giỏ hàng theo userId
    * @param cartId
    */
-  async getCartById(cartId: number): Promise<Cart> {
+  async getCartById(cartId: number): Promise<CartItem> {
     try {
       // DummyJSON API: /carts/${cartId}
-      const response = await httpClient.get<Cart>(`/carts/${cartId}`);
+      const response = await httpClient.get<CartItem>(`/carts/${cartId}`);
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -28,14 +28,14 @@ export class CartService {
    * Lấy giỏ hàng theo userId
    * @param userId ID của user đang login
    */
-  async getCartByUser(userId: number): Promise<Cart[]> {
+  async getCartByUser(userId: number): Promise<Carts[]> {
     if (!userId || userId <= 0) {
       throw new Error("User ID không hợp lệ.");
     }
 
     try {
       // DummyJSON API: /carts/user/{userId}
-      const response = await httpClient.get<{ carts: Cart[] }>(`/carts/user/${userId}`);
+      const response = await httpClient.get<{ carts: Carts[] }>(`/carts/user/${userId}`);
       return response.data.carts;
     } catch (error) {
       if (axios.isAxiosError(error)) {

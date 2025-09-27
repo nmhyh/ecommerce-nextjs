@@ -9,11 +9,6 @@ import MobileMenu from "@/layouts/mobile-menu";
 import { useAuth } from "@/app/auth-context";
 import { useCart } from "@/hooks";
 
-// Dữ liệu giỏ hàng mẫu
-const cartItems = [
-  { id: 1, name: 'Summer black dress', quantity: 1, price: 25.00, image: '/images/single-product/1.jpg' },
-  { id: 2, name: 'Black suit', quantity: 1, price: 125.00, image: '/images/single-product/2.jpg' },
-];
 
 // Icon Menu (Được định nghĩa lại để sử dụng trong Next.js/TSX)
 const MenuIcon = () => (
@@ -22,7 +17,7 @@ const MenuIcon = () => (
   </svg>
 );
 
-// Dữ liệu cho Dropdown Menu
+/*// Dữ liệu cho Dropdown Menu
 const menDropdownItems = [
   { name: 'Men Item 1', href: '/shop' },
   { name: 'Men Item 2', href: '/shop' },
@@ -33,8 +28,7 @@ const womenDropdownItems = [
   { name: 'Women Item 1', href: '/shop' },
   { name: 'Women Item 2', href: '/shop' },
   { name: 'Women Item 3', href: '/shop' },
-];
-
+];*/
 
 export default function Header() {
   const { isAuthenticated, currentUser, logout } = useAuth(); // 🔥 Lấy Auth State và hàm logout
@@ -47,6 +41,7 @@ export default function Header() {
   const [isUserOpen, setIsUserOpen] = useState(false); // 🔥 State cho User Dropdown
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { cart } = useCart(1);
+
 
   // Hàm chung để xử lý hover (cho Men/Women/Cart/User)
   const handleDropdown = (setter: React.Dispatch<React.SetStateAction<boolean>>, state: boolean) =>
@@ -173,7 +168,7 @@ export default function Header() {
                 <div className="absolute right-0 mt-1 w-80 bg-white shadow-lg p-4 rounded block z-10">
                   <div className="space-y-4">
                     {(cart && cart.products.length > 0)
-                      ? cart?.products.map((item, index) => (
+                      ? cart?.products.map((item) => (
                         <div key={item.id} className={`flex items-center justify-between pb-4 border-b border-gray-line`}>
                           <div className="flex items-center">
                             <Image src={item.thumbnail} alt="Product" width={48} height={48} className="h-12 w-12 object-cover rounded mr-2" />
@@ -182,7 +177,9 @@ export default function Header() {
                               <p className="text-sm text-gray-500">Qty: {item.quantity || 1}</p>
                             </div>
                           </div>
-                          <p className="font-semibold text-gray-800">${item.price.toFixed(2)}</p>
+                          <p className="font-semibold text-gray-800">
+                            ${((item.quantity || 1) * item.price).toFixed(2)}
+                          </p>
                         </div>
                       ))
                       : <p className="text-center text-gray-500">Please log in to start shopping.</p>

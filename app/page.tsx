@@ -9,7 +9,6 @@ import BrandCarousel from "@/app/(home)/(components)/brand-carousel";
 import CallToActionBanner from "@/app/(home)/(components)/call-to-action-banner";
 import BlogSection from "@/app/(home)/(components)/blog-section";
 import SubscribeSection from "@/app/(home)/(components)/subscribe-section";
-import { productService } from "@/services";
 import { useProducts } from "@/hooks";
 
 // ----------------------------------------------------------------------
@@ -64,9 +63,9 @@ const brandLogos = [
 // ----------------------------------------------------------------------
 
 export default function HomePage() {
-  const [popularProducts, setPopularProducts] = React.useState<Product[]>([]);
-  const [latestProducts, setLatestProducts] = React.useState<Product[]>([]);
-  const { products, loading, error } = useProducts();
+  const [popularProducts, setPopularProducts] = useState<Product[]>([]);
+  const [latestProducts, setLatestProducts] = useState<Product[]>([]);
+  const { products, loading } = useProducts();
 
   useEffect(() => {
     setPopularProducts(products.slice(0, 4));

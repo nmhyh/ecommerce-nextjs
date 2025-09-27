@@ -28,9 +28,11 @@ export default function LoginForm() {
       await login({ username, password });
       toast.success('Login successful!');
       router.push('/'); // Successful login and redirect
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error('Login failed!');
-      setAuthError(error.message);
+      if (error instanceof Error) {
+        setAuthError(error.message);
+      }
     } finally {
       setLoading(false);
     }

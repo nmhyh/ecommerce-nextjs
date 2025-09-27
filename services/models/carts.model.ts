@@ -1,8 +1,17 @@
-import { Product } from "@/services/models/products.model";
-
 export interface ProductInCart {
   id: number
-  products: Product[]
+  title: string
+  price: number
+  quantity: number
+  total: number
+  discountPercentage: number
+  discountedTotal: number
+  thumbnail: string
+}
+
+export interface CartItem {
+  id: number
+  products: ProductInCart[]
   total: number
   discountedTotal: number
   userId: number
@@ -10,6 +19,6 @@ export interface ProductInCart {
   totalQuantity: number
 }
 
-export interface Cart {
-  carts: ProductInCart[];
+export interface Carts {
+  carts: CartItem[];
 }
