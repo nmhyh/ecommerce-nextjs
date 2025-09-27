@@ -44,9 +44,9 @@ const mainSlides: MainSlide[] = [
 ];
 
 const categoryBanners: CategoryBanner[] = [
-  { image: '/images/cat-image1.jpg', title: 'Men', href: '/shop/men' },
-  { image: '/images/cat-image4.jpg', title: 'Women', href: '/shop/women' },
-  { image: '/images/cat-image5.jpg', title: 'Accessories', href: '/shop/accessories' },
+  { image: '/images/cat-image1.jpg', title: 'Men', href: '/shop' },
+  { image: '/images/cat-image4.jpg', title: 'Women', href: '/shop' },
+  { image: '/images/cat-image5.jpg', title: 'Accessories', href: '/shop' },
 ];
 
 const brandLogos = [

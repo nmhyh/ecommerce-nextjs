@@ -54,7 +54,7 @@ const MainSlider: React.FC<MainSliderProps> = ({ slides }) => {
                   {slide.subtitle.replace(/<br>/g, '\n')} {/* Handle <br> as newline if necessary */}
                 </p>
                 <Link
-                  href="/"
+                  href="/shop"
                   className={`font-semibold px-6 py-3 rounded-full inline-block transition duration-300 
                                         ${slide.buttonStyle === 'primary' ?
                     'bg-primary hover:bg-transparent text-white border border-primary hover:border-white' :

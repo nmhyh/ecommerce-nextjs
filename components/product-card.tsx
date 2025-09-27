@@ -5,6 +5,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Product } from "@/services/models"; // Đã giữ nguyên import type của bạn
 import { redirect } from "next/navigation";
+import { cartService } from "@/services/cart.service";
+import { useAuth } from "@/app/auth-context";
+import { toast } from "sonner";
 
 interface ProductCardProps {
   product: Product;
@@ -17,6 +20,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   // Tính toán giá (Giả định giá cũ = giá hiện tại trong ví dụ này, bạn nên dùng discountPercentage)
   const oldPrice = product.price * (1 / (1 - product.discountPercentage / 100)); // Tính ngược giá gốc nếu có discount
   const currentPrice = product.price;
+  const { isAuthenticated, currentUser } = useAuth(); // 🔥 Lấy Auth State
+
+  const handleAddToCart = async () => {
+    if (!isAuthenticated || product.stock === 0) return;
+    try {
+      const data = await cartService.addToCart(currentUser?.id || 1, product);
+      toast.success(`${product.title} added to cart!`);
+      console.log("Cart updated:", data);
+    } catch (err) {
+      toast.error("Failed to add to cart!");
+      console.error(err);
+    }
+  };
 
   return (
     <div key={product.id} className="bg-white p-3 rounded-lg shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
@@ -64,6 +80,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <button
         className="bg-primary border border-transparent hover:bg-transparent hover:border-primary text-white hover:text-primary font-semibold py-2 px-4 rounded-full w-full transition-colors disabled:opacity-50"
         disabled={product.stock === 0}
+        onClick={handleAddToCart}
       >
         {product.stock > 0 ? "Add to Cart" : "Out of Stock"}
       </button>

@@ -49,7 +49,15 @@ export class CartService {
   // Thêm sản phẩm vào giỏ hàng của user
   async addToCart(userId: number, product: Product): Promise<void> {
     try {
-      await httpClient.post(`/carts/user/${userId}`, { productId: product.id, quantity: 1 });
+      await httpClient.post('/carts/add', {
+        userId: userId,
+        products: [
+          {
+            id: product.id,
+            quantity: 1,
+          }
+        ]
+      });
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.error("Lỗi Axios khi thêm sản phẩm:", error.message);

@@ -2,9 +2,11 @@
 
 import { ProductInCart } from "@/services/models";
 import { useCart } from "@/hooks";
+import { useAuth } from "@/app/auth-context";
 
 export default function CartPage() {
   const { cart, setCart, loading, error } = useCart(1);
+  const { isAuthenticated } = useAuth(); // 🔥 Lấy Auth State và hàm logout
 
   // Tăng số lượng
   const handleIncrement = (productInCart: ProductInCart) => {

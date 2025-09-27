@@ -113,7 +113,7 @@ export default function Header() {
             {/* 🔥 LOGIC XÁC THỰC: HIỂN THỊ ĐĂNG NHẬP HOẶC DROPDOWN USER */}
             {!isAuthenticated ? (
               <>
-                <Link href="/register" className="bg-primary border border-primary hover:bg-transparent text-white hover:text-primary font-semibold px-4 py-2 rounded-full inline-block">Register</Link>
+                {/*<Link href="/register" className="bg-primary border border-primary hover:bg-transparent text-white hover:text-primary font-semibold px-4 py-2 rounded-full inline-block">Register</Link>*/}
                 <Link href="/login" className="bg-primary border border-primary hover:bg-transparent text-white hover:text-primary font-semibold px-4 py-2 rounded-full inline-block">Login</Link>
               </>
             ) : (
@@ -172,22 +172,29 @@ export default function Header() {
               {isCartOpen && (
                 <div className="absolute right-0 mt-1 w-80 bg-white shadow-lg p-4 rounded block z-10">
                   <div className="space-y-4">
-                    {cart?.products.map((item, index) => (
-                      <div key={item.id} className={`flex items-center justify-between pb-4 border-b border-gray-line`}>
-                        <div className="flex items-center">
-                          <Image src={item.thumbnail} alt="Product" width={48} height={48} className="h-12 w-12 object-cover rounded mr-2" />
-                          <div>
-                            <p className="font-semibold text-gray-800">{item.title}</p>
-                            <p className="text-sm text-gray-500">Qty: {item.quantity || 1}</p>
+                    {(cart && cart.products.length > 0)
+                      ? cart?.products.map((item, index) => (
+                        <div key={item.id} className={`flex items-center justify-between pb-4 border-b border-gray-line`}>
+                          <div className="flex items-center">
+                            <Image src={item.thumbnail} alt="Product" width={48} height={48} className="h-12 w-12 object-cover rounded mr-2" />
+                            <div>
+                              <p className="font-semibold text-gray-800">{item.title}</p>
+                              <p className="text-sm text-gray-500">Qty: {item.quantity || 1}</p>
+                            </div>
                           </div>
+                          <p className="font-semibold text-gray-800">${item.price.toFixed(2)}</p>
                         </div>
-                        <p className="font-semibold text-gray-800">${item.price.toFixed(2)}</p>
-                      </div>
-                    ))}
+                      ))
+                      : <p className="text-center text-gray-500">Please log in to start shopping.</p>
+                    }
                   </div>
-                  <Link href="/cart" className="block text-center mt-4 border border-primary bg-primary hover:bg-transparent text-white hover:text-primary py-2 rounded-full font-semibold transition-colors">
-                    Go to Cart
-                  </Link>
+                  {(cart && cart.products.length > 0)
+                    ? <Link href="/cart" className="block text-center mt-4 border border-primary bg-primary hover:bg-transparent text-white hover:text-primary py-2 rounded-full font-semibold transition-colors">
+                      Go to Cart
+                    </Link>
+                    : <Link href="/login" className="block text-center mt-4 border border-primary bg-primary hover:bg-transparent text-white hover:text-primary py-2 rounded-full font-semibold transition-colors">Login</Link>
+                  }
+
                 </div>
               )}
             </div>

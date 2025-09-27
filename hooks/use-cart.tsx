@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { cartService } from "@/services/cart.service";
 import { ProductInCart } from "@/services/models";
+import { useAuth } from "@/app/auth-context";
 
 export function useCart(cartId: number) {
   const [cart, setCart] = useState<ProductInCart | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { isAuthenticated } = useAuth(); // 🔥 Lấy Auth state
 
   useEffect(() => {
     async function fetchCart() {
@@ -20,6 +22,7 @@ export function useCart(cartId: number) {
       }
     }
 
+    if (!isAuthenticated) return;
     fetchCart();
   }, [cartId]);
 

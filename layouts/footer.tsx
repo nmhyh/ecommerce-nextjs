@@ -13,10 +13,10 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Shop</h3>
             <ul>
               <li><Link href="/shop" className="hover:text-primary">Shop</Link></li>
-              <li><Link href="/women" className="hover:text-primary">Women</Link></li>
-              <li><Link href="/men" className="hover:text-primary">Men</Link></li>
-              <li><Link href="/shoes" className="hover:text-primary">Shoes</Link></li>
-              <li><Link href="/accessories" className="hover:text-primary">Accessories</Link></li>
+              <li><Link href="/shop" className="hover:text-primary">Women</Link></li>
+              <li><Link href="/shop" className="hover:text-primary">Men</Link></li>
+              <li><Link href="/shop" className="hover:text-primary">Shoes</Link></li>
+              <li><Link href="/shop" className="hover:text-primary">Accessories</Link></li>
             </ul>
           </div>
 
@@ -25,9 +25,9 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Pages</h3>
             <ul>
               <li><Link href="/shop" className="hover:text-primary">Shop</Link></li>
-              <li><Link href="/product" className="hover:text-primary">Product</Link></li>
+              {/*<li><Link href="/product" className="hover:text-primary">Product</Link></li>
               <li><Link href="/checkout" className="hover:text-primary">Checkout</Link></li>
-              <li><Link href="/404" className="hover:text-primary">404</Link></li>
+              <li><Link href="/404" className="hover:text-primary">404</Link></li>*/}
             </ul>
           </div>
 
@@ -36,7 +36,7 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Account</h3>
             <ul>
               <li><Link href="/cart" className="hover:text-primary">Cart</Link></li>
-              <li><Link href="/register" className="hover:text-primary">Registration</Link></li>
+              {/*<li><Link href="/register" className="hover:text-primary">Registration</Link></li>*/}
               <li><Link href="/login" className="hover:text-primary">Login</Link></li>
             </ul>
           </div>

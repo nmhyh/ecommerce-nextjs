@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useCallback } from 'react';
 import { useAuth } from "@/app/auth-context";
+import { useCart } from "@/hooks";
 
 // Dữ liệu cho các mục menu
 interface MenuItem {
@@ -48,6 +49,7 @@ export default function MobileMenu({ isOpen }: { isOpen: boolean }) {
 
   // State để quản lý việc mở/đóng các dropdown con (Men, Women)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null); // 'men', 'women', hoặc 'user'
+  const { cart } = useCart(1);
 
   const handleDropdownToggle = (key: string) => {
     setOpenDropdown(openDropdown === key ? null : key);
@@ -151,9 +153,9 @@ export default function MobileMenu({ isOpen }: { isOpen: boolean }) {
           ) : (
             // HIỂN THỊ LOGIN/REGISTER KHI CHƯA ĐĂNG NHẬP
             <>
-              <Link href="/register" className="bg-primary hover:bg-transparent text-white hover:text-primary border border-primary font-semibold px-4 py-3 rounded-full inline-block w-full text-center transition-colors">
-                Register
-              </Link>
+              {/*<Link href="/register" className="bg-primary hover:bg-transparent text-white hover:text-primary border border-primary font-semibold px-4 py-3 rounded-full inline-block w-full text-center transition-colors">*/}
+              {/*  Register*/}
+              {/*</Link>*/}
               <Link href="/login" className="bg-primary hover:bg-transparent text-white hover:text-primary border border-primary font-semibold px-4 py-3 rounded-full inline-block w-full text-center transition-colors">
                 Login
               </Link>
@@ -161,9 +163,17 @@ export default function MobileMenu({ isOpen }: { isOpen: boolean }) {
           )}
 
           {/* Cart Button */}
-          <Link href="/cart" className="bg-transparent text-white hover:text-secondary border border-gray-500 font-semibold px-4 py-3 rounded-full inline-block w-full text-center transition-colors">
-            Cart - <span>5</span> items
-          </Link>
+          {
+            isAuthenticated
+            ? <Link href="/cart" className="bg-transparent text-white hover:text-secondary border border-gray-500 font-semibold px-4 py-3 rounded-full inline-block w-full text-center transition-colors">
+                {cart && cart.products.length > 0
+                  ? <>Cart - <span>{cart.products.length}</span> items</>
+                  : <>Your cart is empty</>
+                }
+
+              </Link>
+            : <></>
+          }
         </div>
 
         {/* 3. Search field */}

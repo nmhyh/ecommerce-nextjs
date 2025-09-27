@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from "@/app/auth-context";
+import { toast } from "sonner";
 
 export default function LoginForm() {
   const { login, isAuthenticated } = useAuth();
@@ -25,8 +26,10 @@ export default function LoginForm() {
 
     try {
       await login({ username, password });
+      toast.success('Login successful!');
       router.push('/'); // Successful login and redirect
     } catch (error: any) {
+      toast.error('Login failed!');
       setAuthError(error.message);
     } finally {
       setLoading(false);

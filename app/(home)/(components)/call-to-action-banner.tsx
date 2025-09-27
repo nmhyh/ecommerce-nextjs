@@ -14,9 +14,9 @@ const CallToActionBanner: React.FC = () => {
         <div className="relative flex flex-col items-center justify-center h-full text-center text-white py-10 md:py-20">
           <h2 className="text-4xl md:text-5xl font-extrabold mb-6">Welcome to Our Shop</h2>
           <div className="flex flex-wrap justify-center space-x-2 md:space-x-4">
-            <Link href="#" className="bg-primary hover:bg-transparent text-white hover:text-white border border-transparent hover:border-white font-semibold px-5 py-2.5 rounded-full inline-block mb-2 transition-colors">Shop Now</Link>
-            <Link href="#" className="bg-primary hover:bg-transparent text-white hover:text-white border border-transparent hover:border-white font-semibold px-5 py-2.5 rounded-full inline-block mb-2 transition-colors">New Arrivals</Link>
-            <Link href="#" className="bg-primary hover:bg-transparent text-white hover:text-white border border-transparent hover:border-white font-semibold px-5 py-2.5 rounded-full inline-block mb-2 transition-colors">Sale</Link>
+            <Link href="/shop" className="bg-primary hover:bg-transparent text-white hover:text-white border border-transparent hover:border-white font-semibold px-5 py-2.5 rounded-full inline-block mb-2 transition-colors">Shop Now</Link>
+            <Link href="/shop" className="bg-primary hover:bg-transparent text-white hover:text-white border border-transparent hover:border-white font-semibold px-5 py-2.5 rounded-full inline-block mb-2 transition-colors">New Arrivals</Link>
+            <Link href="/shop" className="bg-primary hover:bg-transparent text-white hover:text-white border border-transparent hover:border-white font-semibold px-5 py-2.5 rounded-full inline-block mb-2 transition-colors">Sale</Link>
           </div>
         </div>
       </div>
