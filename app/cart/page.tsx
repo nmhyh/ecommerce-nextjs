@@ -1,32 +1,10 @@
-// pages/cart.tsx
 "use client";
 
-import { useEffect, useState } from "react";
-import { cartService } from "@/services/cart.service";
 import { ProductInCart } from "@/services/models";
+import { useCart } from "@/hooks";
 
 export default function CartPage() {
-  const [cart, setCart] = useState<ProductInCart>();
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-
-  // Lấy giỏ hàng khi component mount
-  useEffect(() => {
-    async function fetchCart() {
-      try {
-        setLoading(true);
-        const data = await cartService.getCartById(1);
-        console.log('data', data)
-        setCart(data);
-      } catch (err: any) {
-        setError(err.message || "Lỗi khi lấy giỏ hàng");
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchCart();
-  }, []);
+  const { cart, setCart, loading, error } = useCart(1);
 
   // Tăng số lượng
   const handleIncrement = (productInCart: ProductInCart) => {

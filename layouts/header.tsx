@@ -7,6 +7,7 @@ import Image from 'next/image'; // Sử dụng Image của Next.js cho tối ưu
 import { useState, useCallback } from 'react';
 import MobileMenu from "@/layouts/mobile-menu";
 import { useAuth } from "@/app/auth-context";
+import { useCart } from "@/hooks";
 
 // Dữ liệu giỏ hàng mẫu
 const cartItems = [
@@ -39,12 +40,13 @@ export default function Header() {
   const { isAuthenticated, currentUser, logout } = useAuth(); // 🔥 Lấy Auth State và hàm logout
 
   // Quản lý trạng thái cho các Dropdown
-  const [isMenOpen, setIsMenOpen] = useState(false);
-  const [isWomenOpen, setIsWomenOpen] = useState(false);
+  /*const [isMenOpen, setIsMenOpen] = useState(false);
+  const [isWomenOpen, setIsWomenOpen] = useState(false);*/
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isUserOpen, setIsUserOpen] = useState(false); // 🔥 State cho User Dropdown
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { cart } = useCart(1);
 
   // Hàm chung để xử lý hover (cho Men/Women/Cart/User)
   const handleDropdown = (setter: React.Dispatch<React.SetStateAction<boolean>>, state: boolean) =>
@@ -170,13 +172,13 @@ export default function Header() {
               {isCartOpen && (
                 <div className="absolute right-0 mt-1 w-80 bg-white shadow-lg p-4 rounded block z-10">
                   <div className="space-y-4">
-                    {cartItems.map((item, index) => (
-                      <div key={item.id} className={`flex items-center justify-between ${index < cartItems.length - 1 ? 'pb-4 border-b border-gray-line' : ''}`}>
+                    {cart?.products.map((item, index) => (
+                      <div key={item.id} className={`flex items-center justify-between pb-4 border-b border-gray-line`}>
                         <div className="flex items-center">
-                          <Image src={item.image} alt="Product" width={48} height={48} className="h-12 w-12 object-cover rounded mr-2" />
+                          <Image src={item.thumbnail} alt="Product" width={48} height={48} className="h-12 w-12 object-cover rounded mr-2" />
                           <div>
-                            <p className="font-semibold text-gray-800">{item.name}</p>
-                            <p className="text-sm text-gray-500">Qty: {item.quantity}</p>
+                            <p className="font-semibold text-gray-800">{item.title}</p>
+                            <p className="text-sm text-gray-500">Qty: {item.quantity || 1}</p>
                           </div>
                         </div>
                         <p className="font-semibold text-gray-800">${item.price.toFixed(2)}</p>
