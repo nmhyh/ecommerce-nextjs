@@ -58,7 +58,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         onClick={() => {
           redirect(`/shop/${product.id}`);
         }}
-        href={`/shop/${product.id}`} className="text-lg font-semibold mb-2 hover:text-primary transition-colors block">
+        href={`/shop/${product.id}`}
+        className="text-lg h-[56px] font-semibold mb-2 hover:text-primary transition-colors block line-clamp-2"
+      >
         {product.title}
       </Link>
       <p className="my-2 text-sm text-gray-500">{product.category}</p>
