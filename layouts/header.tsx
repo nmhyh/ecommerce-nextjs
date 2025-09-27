@@ -137,8 +137,8 @@ export default function Header() {
                   <div className="absolute right-0 mt-1 w-56 bg-white shadow-lg p-3 rounded block text-black z-10">
                     <p className="font-bold border-b pb-2 mb-2">Welcome, {currentUser?.firstName}!</p>
                     <ul className="space-y-1">
-                      <li><Link href="/profile" className="block px-3 py-2 hover:bg-gray-100 rounded">Profile</Link></li>
-                      <li><Link href="/orders" className="block px-3 py-2 hover:bg-gray-100 rounded">My Orders</Link></li>
+                      <li><Link href="/my-profile" className="block px-3 py-2 hover:bg-gray-100 rounded">Profile</Link></li>
+                      {/*<li><Link href="/orders" className="block px-3 py-2 hover:bg-gray-100 rounded">My Orders</Link></li>*/}
                       <li className="pt-2 border-t mt-2">
                         <button
                           onClick={handleLogout}

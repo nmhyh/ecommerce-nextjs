@@ -136,8 +136,8 @@ export default function MobileMenu({ isOpen }: { isOpen: boolean }) {
 
               {openDropdown === 'user' && (
                 <ul className="mt-2 space-y-1 bg-gray-800 p-3 rounded-lg">
-                  <li><Link href="/profile" className="block py-2 px-4 hover:bg-gray-700 rounded transition-colors">Profile</Link></li>
-                  <li><Link href="/orders" className="block py-2 px-4 hover:bg-gray-700 rounded transition-colors">My Orders</Link></li>
+                  <li><Link href="/my-profile" className="block py-2 px-4 hover:bg-gray-700 rounded transition-colors">Profile</Link></li>
+                  {/*<li><Link href="/orders" className="block py-2 px-4 hover:bg-gray-700 rounded transition-colors">My Orders</Link></li>*/}
                   <li className="pt-2 border-t border-gray-600 mt-2">
                     <button
                       onClick={handleLogout}
