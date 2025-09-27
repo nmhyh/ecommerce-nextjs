@@ -98,12 +98,14 @@ export default function CartPage() {
                         >
                           <td className="px-1 py-4">
                             <div className="flex items-center flex-col sm:flex-row text-center sm:text-left">
-                              <Image
-                                fill
-                                className="h-16 w-16 md:h-24 md:w-24 sm:mr-8 mb-4 sm:mb-0"
-                                src={product.thumbnail}
-                                alt={product.title}
-                              />
+                              <div className="relative w-16 h-16 md:w-24 md:h-24 sm:mr-8 mb-4 sm:mb-0 flex-shrink-0">
+                                <Image
+                                  src={product.thumbnail}
+                                  alt={product.title}
+                                  fill
+                                  className="object-cover rounded-md border"
+                                />
+                              </div>
                               <p className="text-sm md:text-base md:font-semibold">
                                 {product.title}
                               </p>
