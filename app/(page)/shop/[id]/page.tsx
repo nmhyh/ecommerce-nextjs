@@ -1,11 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { productService } from "@/services";
 import ProductTabs from "@/app/(page)/shop/[id]/(components)/product-tabs";
 import { useEffect, useState } from "react";
 import { Product } from "@/services/models";
-import { useProducts } from "@/app/hooks";
+import { useProductItem, useProducts } from "@/app/hooks";
 import ProductCard from "@/components/product-card";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -13,28 +12,9 @@ import { useParams } from "next/navigation";
 export default function ProductDetailPage() {
   const params = useParams<{ id: string }>(); // 👈 khai báo generic để có type
   const id = params.id; // string
-  const [product, setProduct] = useState<Product | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
   const { products } = useProducts();
   const [latestProducts, setLatestProducts] = useState<Product[]>([]);
-
-  useEffect(() => {
-    async function fetchProductItem() {
-      try {
-        const res = await productService.getProductById(Number(id));
-        setProduct(res);
-      } catch (err: unknown) {
-        if (err instanceof Error) {
-          setError(err.message || "Something went wrong");
-        }
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchProductItem();
-  }, [id]);
+  const { product, loading, error } = useProductItem(Number(id));
 
   useEffect(() => {
     setLatestProducts(products.slice(-4));

@@ -4,10 +4,11 @@
 
 import Link from 'next/link';
 import Image from 'next/image'; // Sử dụng Image của Next.js cho tối ưu hóa
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import MobileMenu from "@/app/layouts/mobile-menu";
 import { useAuth } from "@/app/providers/auth-context";
 import { useCart } from "@/app/hooks";
+import { useRouter } from "next/navigation";
 
 
 // Icon Menu (Được định nghĩa lại để sử dụng trong Next.js/TSX)
@@ -41,7 +42,8 @@ export default function Header() {
   const [isUserOpen, setIsUserOpen] = useState(false); // 🔥 State cho User Dropdown
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { cart } = useCart(1);
-
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const router = useRouter();
 
   // Hàm chung để xử lý hover (cho Men/Women/Cart/User)
   const handleDropdown = (setter: React.Dispatch<React.SetStateAction<boolean>>, state: boolean) =>
@@ -50,6 +52,7 @@ export default function Header() {
   const handleLogout = useCallback(() => {
     logout();
     setIsUserOpen(false); // Đóng dropdown sau khi logout
+    router.push('/');
   }, [logout]);
 
 
@@ -72,7 +75,7 @@ export default function Header() {
 
           {/* Hamburger menu (for mobile) */}
           <div className="flex lg:hidden">
-            <button id="hamburger" className="text-white focus:outline-none" aria-label="Toggle menu"
+            <button ref={buttonRef} id="hamburger" className="text-white focus:outline-none" aria-label="Toggle menu"
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
               <MenuIcon />
             </button>
@@ -218,7 +221,7 @@ export default function Header() {
         </div>
       </header>
       {/* Mobile Menu */}
-      {mobileMenuOpen && <MobileMenu isOpen={mobileMenuOpen} />}
+      {mobileMenuOpen && <MobileMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} buttonRef={buttonRef} />}
     </>
   );
 }

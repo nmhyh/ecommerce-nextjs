@@ -15,7 +15,6 @@ const tabs = [
 
 const ProductTabs: React.FC<ProductCardProps> = ({ product }) => {
   const [activeTab, setActiveTab] = useState("description");
-  console.log(product)
 
   return (
     <section className="py-12">

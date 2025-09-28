@@ -28,7 +28,8 @@ export default function ShopPage () {
   const totalPages = Math.ceil(totalProducts / ITEMS_PER_PAGE);
 
   useEffect(() => {
-    setTotalProducts(productsOrigin.length);
+    if (!productsOrigin) return
+    setTotalProducts(productsOrigin.length || 0);
     setCategories([...new Set(productsOrigin.map((p) => p.category))]);
     setBrands([...new Set(productsOrigin.map((p) => p.brand))]);
     setProducts(productsOrigin.slice(0, ITEMS_PER_PAGE));

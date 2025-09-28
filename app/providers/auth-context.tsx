@@ -1,8 +1,9 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useContext, useCallback } from 'react';
 import { LoginPayload, UserProfile } from "@/services/models";
-import { authService, localStorageService } from "@/services";
+import { authService } from "@/services";
+import { useAuthUser } from "@/app/hooks";
 
 // --- DEFINITIONS ---
 
@@ -19,54 +20,30 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 // --- PROVIDER COMPONENT ---
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const { currentUser, isAuthenticated, loading, error, mutateUser } = useAuthUser();
 
-  // Loads current user information when the application loads
-  const loadUserFromToken = useCallback(async () => {
-    try {
-      const userDetails = await authService.getCurrentUser();
-      // Attach the token back to the User object
-      setCurrentUser({ ...userDetails });
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (error) {
-      // If the token is expired or invalid, log out
-      authService.logout();
-      setCurrentUser(null);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    const token = localStorageService.getItem('authToken');
-    if (token) {
-      loadUserFromToken();
-    } else {
-      setLoading(false);
-    }
-  }, [loadUserFromToken]);
-
-  const login = useCallback(async (credentials: LoginPayload) => {
-    setLoading(true);
-    try {
-      const user = await authService.login(credentials);
-      setCurrentUser(user);
-    } catch (error) {
-      throw error; // Throw the error so the Login component can handle it
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  const login = useCallback(
+    async (credentials: LoginPayload) => {
+      try {
+        const user = await authService.login(credentials);
+        // cập nhật lại cache SWR với user mới
+        mutateUser(user, false);
+      } catch (error) {
+        throw error; // component Login sẽ handle
+      }
+    },
+    [mutateUser]
+  );
 
   const logout = useCallback(() => {
     authService.logout();
-    setCurrentUser(null);
-  }, []);
+    // clear cache SWR
+    mutateUser(null, false);
+  }, [mutateUser]);
 
   const value: AuthContextType = {
     currentUser,
-    isAuthenticated: !!currentUser,
+    isAuthenticated,
     loading,
     login,
     logout,

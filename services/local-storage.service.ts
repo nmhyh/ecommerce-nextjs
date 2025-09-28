@@ -47,7 +47,6 @@ export class LocalStorageService {
       // Chuyển đổi giá trị sang JSON string trước khi lưu
       const serializedValue = JSON.stringify(value);
       localStorage.setItem(key, serializedValue);
-      console.log('set login')
     } catch (error) {
       console.error(`Lỗi khi lưu dữ liệu vào LocalStorage cho khóa "${key}":`, error);
     }

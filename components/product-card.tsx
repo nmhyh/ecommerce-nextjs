@@ -4,10 +4,10 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Product } from "@/services/models"; // Đã giữ nguyên import type của bạn
-import { redirect } from "next/navigation";
 import { cartService } from "@/services/cart.service";
 import { useAuth } from "@/app/providers/auth-context";
 import { toast } from "sonner";
+import { mutate } from "swr";
 
 interface ProductCardProps {
   product: Product;
@@ -34,9 +34,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     }
 
     try {
-      const data = await cartService.addToCart(currentUser?.id || 1, product);
+      // gọi API addToCart
+      const updatedCart = await cartService.addToCart(currentUser?.id || 1, product);
+
+      // cập nhật lại cache của SWR (key: `cart-${userId}`)
+      mutate(`cart-${currentUser?.id || 1}`, updatedCart, false);
+
       toast.success(`${product.title} added to cart!`);
-      console.log("Cart updated:", data);
     } catch (err) {
       toast.error("Failed to add to cart!");
       console.error(err);
@@ -64,9 +68,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       </div>
 
       <Link
-        onClick={() => {
-          redirect(`/shop/${product.id}`);
-        }}
         href={`/shop/${product.id}`}
         className="text-lg h-[56px] font-semibold mb-2 hover:text-primary transition-colors block line-clamp-2"
       >

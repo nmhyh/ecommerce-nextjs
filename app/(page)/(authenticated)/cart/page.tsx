@@ -1,13 +1,20 @@
 "use client";
 
-import { ProductInCart } from "@/services/models";
+import { CartItem, ProductInCart } from "@/services/models";
 import { useCart } from "@/app/hooks";
 import { useAuth } from "@/app/providers/auth-context";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function CartPage() {
-  const { cart, setCart, loading, error } = useCart(1);
+  const { cart: cartData, loading, error } = useCart(1);
   const { isAuthenticated } = useAuth(); // 🔥 Lấy Auth State và hàm logout
+  const [cart, setCart] = useState<CartItem>();
+
+  useEffect(() => {
+    if (!cartData) return;
+    setCart(cartData);
+  }, [cartData]);
 
   // Tăng số lượng
   const handleIncrement = (productInCart: ProductInCart) => {

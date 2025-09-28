@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from "@/app/providers/auth-context";
 import { toast } from "sonner";
@@ -14,10 +14,13 @@ export default function LoginForm() {
   const [loading, setLoading] = useState(false);
 
   // Redirect if already authenticated
-  if (isAuthenticated) {
-    router.push('/shop'); // Redirect to the home page
-    return null;
-  }
+  useEffect(() => {
+    if (isAuthenticated) {
+      // Đảm bảo việc chuyển hướng chỉ xảy ra sau khi render
+      // và khi trạng thái isAuthenticated thay đổi.
+      router.push('/shop');
+    }
+  }, [isAuthenticated]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
