@@ -82,7 +82,7 @@ export default function Header() {
           <nav className="hidden lg:flex md:flex-grow justify-center">
             <ul className="flex justify-center space-x-4 text-white">
               {/* Menu items (giữ nguyên) */}
-              <li><Link href="/public" className="hover:text-secondary font-semibold">Home</Link></li>
+              <li><Link href="/" className="hover:text-secondary font-semibold">Home</Link></li>
               {/*<li className="relative group" onMouseEnter={handleDropdown(setIsMenOpen, true)} onMouseLeave={handleDropdown(setIsMenOpen, false)}>
                 <Link href="/shop" className="hover:text-secondary font-semibold flex items-center">Men<i className={`${isMenOpen ? 'fas fa-chevron-up' : 'fas fa-chevron-down'} ml-1 text-xs`}></i></Link>
                 {isMenOpen && (<ul className="absolute left-0 bg-white text-black space-y-2 mt-1 p-2 rounded shadow-lg transition-all duration-100 ease-out origin-top min-w-40">

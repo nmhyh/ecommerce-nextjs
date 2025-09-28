@@ -58,7 +58,7 @@ export default function ProductDetailPage() {
       <nav className="mb-6 text-sm text-gray-600">
         <ul className="flex space-x-2">
           <li>
-            <Link href="/public" className="hover:underline">
+            <Link href="/" className="hover:underline">
               Home
             </Link>
           </li>
