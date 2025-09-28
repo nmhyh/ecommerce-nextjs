@@ -23,7 +23,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { isAuthenticated, currentUser } = useAuth(); // 🔥 Lấy Auth State
 
   const handleAddToCart = async () => {
-    if (!isAuthenticated || product.stock === 0) return;
+    if (!isAuthenticated) {
+      toast.error("Please log in to add to cart!");
+      return;
+    }
+
+    if (product.stock === 0) {
+      toast.error("Out of stock! Please try again later.");
+      return;
+    }
+
     try {
       const data = await cartService.addToCart(currentUser?.id || 1, product);
       toast.success(`${product.title} added to cart!`);
