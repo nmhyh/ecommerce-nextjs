@@ -15,7 +15,7 @@ export default function LoginForm() {
 
   // Redirect if already authenticated
   if (isAuthenticated) {
-    router.push('/shop'); // Redirect to the (home) page
+    router.push('/shop'); // Redirect to the home page
     return null;
   }
 

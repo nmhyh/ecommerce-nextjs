@@ -2,6 +2,14 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  async rewrites() {
+    return [
+      {
+        source: '/',
+        destination: '/home',
+      },
+    ]
+  },
   images: {
     // Thêm các hostname từ DummyJSON
     // Có vẻ DummyJSON sử dụng hai subdomain chính cho hình ảnh
