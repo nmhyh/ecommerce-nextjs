@@ -58,7 +58,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         onClick={() => {
           redirect(`/shop/${product.id}`);
         }}
-        href={`/app/(page)/shop/${product.id}`}
+        href={`/shop/${product.id}`}
         className="text-lg h-[56px] font-semibold mb-2 hover:text-primary transition-colors block line-clamp-2"
       >
         {product.title}

@@ -59,7 +59,7 @@ export default function Header() {
         <div className="container mx-auto flex justify-between items-center py-4 px-4 sm:px-6 lg:px-8">
 
           {/* Left section: Logo */}
-          <Link href="/public" className="flex items-center">
+          <Link href="/" className="flex items-center">
             {/* Sử dụng Image component của Next.js */}
             <Image
               src="/images/template-white-logo.png"
