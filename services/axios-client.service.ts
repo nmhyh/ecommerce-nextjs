@@ -68,11 +68,6 @@ export class AxiosClient {
 
           // Xóa token cũ
           clearAuthStorage();
-
-          // Chuyển hướng cứng đến trang đăng nhập
-          if (typeof window !== 'undefined' && window.location.pathname !== '/login') {
-            window.location.href = '/login';
-          }
         }
 
         return Promise.reject(error);

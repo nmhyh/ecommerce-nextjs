@@ -221,7 +221,7 @@ export default function Header() {
         </div>
       </header>
       {/* Mobile Menu */}
-      {mobileMenuOpen && <MobileMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} buttonRef={buttonRef} />}
+      {mobileMenuOpen && <MobileMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} buttonRef={buttonRef as React.RefObject<HTMLButtonElement>} />}
     </>
   );
 }
