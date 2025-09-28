@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { productService } from "@/services";
-import ProductTabs from "@/app/shop/[id]/(components)/product-tabs";
+import ProductTabs from "@/app/(page)/shop/[id]/(components)/product-tabs";
 import { useEffect, useState } from "react";
 import { Product } from "@/services/models";
-import { useProducts } from "@/hooks";
+import { useProducts } from "@/app/hooks";
 import ProductCard from "@/components/product-card";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -58,7 +58,7 @@ export default function ProductDetailPage() {
       <nav className="mb-6 text-sm text-gray-600">
         <ul className="flex space-x-2">
           <li>
-            <Link href="/" className="hover:underline">
+            <Link href="/public" className="hover:underline">
               Home
             </Link>
           </li>

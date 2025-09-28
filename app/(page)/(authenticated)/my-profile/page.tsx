@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { useAuth } from "@/app/auth-context";
+import { useAuth } from "@/app/providers/auth-context";
 
 export default function ProfilePage() {
   const { isAuthenticated, currentUser } = useAuth(); // 🔥 Lấy Auth State

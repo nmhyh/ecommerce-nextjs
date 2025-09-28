@@ -1,8 +1,8 @@
 "use client";
 
 import { ProductInCart } from "@/services/models";
-import { useCart } from "@/hooks";
-import { useAuth } from "@/app/auth-context";
+import { useCart } from "@/app/hooks";
+import { useAuth } from "@/app/providers/auth-context";
 import Image from "next/image";
 
 export default function CartPage() {

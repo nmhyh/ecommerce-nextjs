@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { Product } from "@/services/models"; // Đã giữ nguyên import type của bạn
 import { redirect } from "next/navigation";
 import { cartService } from "@/services/cart.service";
-import { useAuth } from "@/app/auth-context";
+import { useAuth } from "@/app/providers/auth-context";
 import { toast } from "sonner";
 
 interface ProductCardProps {
@@ -58,7 +58,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         onClick={() => {
           redirect(`/shop/${product.id}`);
         }}
-        href={`/shop/${product.id}`}
+        href={`/app/(page)/shop/${product.id}`}
         className="text-lg h-[56px] font-semibold mb-2 hover:text-primary transition-colors block line-clamp-2"
       >
         {product.title}

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from "@/app/auth-context";
+import { useAuth } from "@/app/providers/auth-context";
 import { toast } from "sonner";
 
 export default function LoginForm() {

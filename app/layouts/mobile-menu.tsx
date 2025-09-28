@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useCallback } from 'react';
-import { useAuth } from "@/app/auth-context";
-import { useCart } from "@/hooks";
+import { useAuth } from "@/app/providers/auth-context";
+import { useCart } from "@/app/hooks";
 
 // Dữ liệu cho các mục menu
 interface MenuItem {

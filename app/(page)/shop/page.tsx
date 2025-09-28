@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import ProductCard from "@/components/product-card";
-import { useProducts } from "@/hooks";
+import { useProducts } from "@/app/hooks";
 import { Product } from "@/services/models";
 
 const ITEMS_PER_PAGE = 12;

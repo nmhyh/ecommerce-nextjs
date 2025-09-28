@@ -5,9 +5,9 @@
 import Link from 'next/link';
 import Image from 'next/image'; // Sử dụng Image của Next.js cho tối ưu hóa
 import { useState, useCallback } from 'react';
-import MobileMenu from "@/layouts/mobile-menu";
-import { useAuth } from "@/app/auth-context";
-import { useCart } from "@/hooks";
+import MobileMenu from "@/app/layouts/mobile-menu";
+import { useAuth } from "@/app/providers/auth-context";
+import { useCart } from "@/app/hooks";
 
 
 // Icon Menu (Được định nghĩa lại để sử dụng trong Next.js/TSX)
@@ -59,7 +59,7 @@ export default function Header() {
         <div className="container mx-auto flex justify-between items-center py-4 px-4 sm:px-6 lg:px-8">
 
           {/* Left section: Logo */}
-          <Link href="/" className="flex items-center">
+          <Link href="/public" className="flex items-center">
             {/* Sử dụng Image component của Next.js */}
             <Image
               src="/images/template-white-logo.png"
@@ -82,7 +82,7 @@ export default function Header() {
           <nav className="hidden lg:flex md:flex-grow justify-center">
             <ul className="flex justify-center space-x-4 text-white">
               {/* Menu items (giữ nguyên) */}
-              <li><Link href="/" className="hover:text-secondary font-semibold">Home</Link></li>
+              <li><Link href="/public" className="hover:text-secondary font-semibold">Home</Link></li>
               {/*<li className="relative group" onMouseEnter={handleDropdown(setIsMenOpen, true)} onMouseLeave={handleDropdown(setIsMenOpen, false)}>
                 <Link href="/shop" className="hover:text-secondary font-semibold flex items-center">Men<i className={`${isMenOpen ? 'fas fa-chevron-up' : 'fas fa-chevron-down'} ml-1 text-xs`}></i></Link>
                 {isMenOpen && (<ul className="absolute left-0 bg-white text-black space-y-2 mt-1 p-2 rounded shadow-lg transition-all duration-100 ease-out origin-top min-w-40">

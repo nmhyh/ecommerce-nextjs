@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { cartService } from "@/services/cart.service";
 import { CartItem } from "@/services/models";
-import { useAuth } from "@/app/auth-context";
+import { useAuth } from "@/app/providers/auth-context";
 
 export function useCart(cartId: number) {
   const [cart, setCart] = useState<CartItem | null>(null);

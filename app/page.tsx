@@ -1,15 +1,15 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import MainSlider, { MainSlide } from "@/app/(home)/(components)/main-slider";
-import CategoryBanners, { CategoryBanner } from "@/app/(home)/(components)/category-banners";
+import MainSlider, { MainSlide } from "@/app/(page)/(home)/(components)/main-slider";
+import CategoryBanners, { CategoryBanner } from "@/app/(page)/(home)/(components)/category-banners";
 import { Product } from "@/services/models";
-import ProductSection from "@/app/(home)/(components)/product-section";
-import BrandCarousel from "@/app/(home)/(components)/brand-carousel";
-import CallToActionBanner from "@/app/(home)/(components)/call-to-action-banner";
-import BlogSection from "@/app/(home)/(components)/blog-section";
-import SubscribeSection from "@/app/(home)/(components)/subscribe-section";
-import { useProducts } from "@/hooks";
+import ProductSection from "@/app/(page)/(home)/(components)/product-section";
+import BrandCarousel from "@/app/(page)/(home)/(components)/brand-carousel";
+import CallToActionBanner from "@/app/(page)/(home)/(components)/call-to-action-banner";
+import BlogSection from "@/app/(page)/(home)/(components)/blog-section";
+import SubscribeSection from "@/app/(page)/(home)/(components)/subscribe-section";
+import { useProducts } from "@/app/hooks";
 
 // ----------------------------------------------------------------------
 // MOCK DATA (Dữ liệu mẫu)
